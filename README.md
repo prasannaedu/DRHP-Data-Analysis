@@ -94,7 +94,7 @@ Fork the repository
 - [PyMuPDF (fitz)](#PyMuPDF (fitz))
 - [pdfplumber](#pdfplumber)
 - [FAISS ](#FAISS )
-- [Hugging Face Transformers ](#Hugging Face Transformers )
+- [Hugging Face Transformers ](#HuggingFaceTransformers )
 - [sentence-transformers](#sentence-transformers)
 - [NumPy / Pandas](#NumPy/Pandas)
 - [JSON](#JSON )
