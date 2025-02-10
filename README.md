@@ -12,7 +12,7 @@
 - [Extract Data from PDFs](#extractdatafrompdfs)
 - [Extract Data from PDFs](#extractdatafrompdfs)
 - [Project Structure](#projectstructure)
-- 
+- [Install Dependencies](#InstallDependencies)
 
 ## Introduction
 • This project involves extracting, parsing, structuring, and embedding data from large PDF documents (Draft Red Herring Prospectus - DRHP) using Python. The structured data is stored in a vector database (FAISS) for efficient querying.
@@ -72,6 +72,9 @@ Fork the repository
 3.Push to the branch (git push origin feature/AmazingFeature)
 
 4.Open a Pull Request
+
+## Install Dependencies
+
 
 ## Project Structure
 📁 data analysis drhp
