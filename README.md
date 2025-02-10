@@ -5,7 +5,7 @@
 - [Introduction](#introduction)
 - [Features](#features)
 - [Installation](#installation)
-- [Generate & Store Embeddings](#Generate & store embeddings)
+- [Generate & Store Embeddings](#Generate&storeembeddings)
 - [Contributing](#contributing)
 - [License](#license)
 - [Query the Vector Database](#querythevectordatabase)
@@ -96,7 +96,7 @@ Fork the repository
 - [FAISS ](#FAISS )
 - [Hugging Face Transformers ](#Hugging Face Transformers )
 - [sentence-transformers](#sentence-transformers)
-- [NumPy / Pandas](#NumPy / Pandas)
+- [NumPy / Pandas](#NumPy/Pandas)
 - [JSON](#JSON )
-- [Git & GitHub  ](#Git & GitHub  )
+- [Git & GitHub  ](#Git&GitHub  )
   
