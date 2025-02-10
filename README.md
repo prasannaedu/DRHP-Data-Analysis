@@ -1,17 +1,37 @@
-## DRHP Data Analysis
-📊 Parsing, Embedding, and Storing Large PDF Data in a Vector Database
+# DRHP Data Analysis
+📊 Parsing, Embedding, and Storing Large PDF Data in a Vector Database.
 
-📌 Overview
-•This project involves extracting, parsing, structuring, and embedding data from large PDF documents (Draft Red Herring Prospectus - DRHP) using Python. The structured data is stored in a vector database (FAISS) for efficient querying.
+## Table of Contents
+- [Introduction](#introduction)
+- [Features](#features)
+- [Installation](#installation)
+- [Generate & Store Embeddings](#Generate & store embeddings)
+- [Contributing](#contributing)
+- [License](#license)
+- [Query the Vector Database](#querythevectordatabase)
+- [Extract Data from PDFs](#extractdatafrompdfs)
+- [Extract Data from PDFs](#extractdatafrompdfs)
+- [Project Structure](#projectstructure)
+- 
 
-## Key Features:
-•Extract structured data (text & tables) from PDFs.
-•Generate summaries & key findings using NLP models.
-•Create vector embeddings for summaries.
-•Store data in FAISS for fast similarity-based search.
-•Query the vector database using natural language.
+## Introduction
+• This project involves extracting, parsing, structuring, and embedding data from large PDF documents (Draft Red Herring Prospectus - DRHP) using Python. The structured data is stored in a vector database (FAISS) for efficient querying.
 
-## Technologies Used:
+## Features
+- Extract structured data (text & tables) from PDFs.
+- Generate summaries & key findings using NLP models.
+- Create vector embeddings for summaries.
+- Store data in FAISS for fast similarity-based search.
+- Query the vector database using natural language
+
+## Installation
+
+Clone the repository:
+```bash
+git clone https://github.com/prasannaedu/DRHP-Data-Analysis.git
+cd DRHP-Data-Analysis
+```
+## Install dependencies
 •Python (Primary Language)
 •PyMuPDF (fitz) → Extracting text from PDFs
 •pdfplumber → Extracting structured tabular data
@@ -20,9 +40,40 @@
 •sentence-transformers → Generating vector embeddings
 •NumPy / Pandas → Data processing
 •JSON → Storing structured extracted data
-•Git & GitHub → Version control
+•Git & GitHub → Version contro
 
-📂 Project Structure:
+##  Create a Virtual Environment:
+python -m venv drhp_env
+source drhp_env/bin/activate  # On macOS/Linux
+drhp_env\Scripts\activate     # On Windows
+
+
+##  Extract Data from PDFs
+python scripts/extract_text.py
+python scripts/extract_tables.py
+
+
+## Generate & Store Embeddings
+python scripts/generate_embeddings.py
+python scripts/store_embeddings.py
+
+## Query the Vector Database
+python scripts/query_faiss.py
+
+
+## Contributing
+Contributions are welcome! Please fork the repository and use a feature branch. Pull requests are warmly welcome.
+Fork the repository
+
+1.Create your feature branch (git checkout -b feature/AmazingFeature)
+
+2.Commit your changes (git commit -m 'Add some AmazingFeature')
+
+3.Push to the branch (git push origin feature/AmazingFeature)
+
+4.Open a Pull Request
+
+## Project Structure
 📁 data analysis drhp
 │── 📂 drhp_env/                 # Virtual environment (ignored in Git)
 │── 📂 data/                      # Raw PDF files
@@ -37,63 +88,15 @@
 │── 📜 requirements.txt           # Dependencies
 │── 📜 README.md                  # Project Documentation
 
-## Setup & Installation:
-1️. Clone the Repository
-git clone https://github.com/prasannaedu/DRHP-Data-Analysis.git
-cd DRHP-Data-Analysis
 
-## Create a Virtual Environment:
-python -m venv drhp_env
-source drhp_env/bin/activate  # On macOS/Linux
-drhp_env\Scripts\activate     # On Windows
-
-## Install Dependencies:
---pip install -r requirements.txt
-
-## How to Run:
---Extract Data from PDFs:
-python scripts/extract_text.py
-python scripts/extract_tables.py
-
-## Generate & Store Embeddings:
-python scripts/generate_embeddings.py
-python scripts/store_embeddings.py
-
-## Query the Vector Database:
-python scripts/query_faiss.py
-🔍 Example Query:
-Revenue growth of Kumar Arch Tech Limited
-
-## What I Learned:
-• PDF Data Extraction: Using PyMuPDF & pdfplumber for structured parsing.
-• Vector Embeddings: Generating sentence embeddings using sentence-transformers.
-• FAISS Vector Database: Efficient similarity search on extracted summaries.
-• Git & GitHub: Repository setup, version control, and troubleshooting push errors.
-• Virtual Environments: Managing dependencies with venv.
-• Performance Optimization: Handling large datasets efficiently.
-
-## Features:
-• Improve parsing for complex PDF structures.
-• Enhance search query results using semantic search.
-• Implement a web interface for querying FAISS easily.
-
-## Author:
-🔗 GitHub: prasannaedu
-📧 Email: [udumulaprasannakumar.com]
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+## Table of Contents
+- [Python](#Python)
+- [PyMuPDF (fitz)](#PyMuPDF (fitz))
+- [pdfplumber](#pdfplumber)
+- [FAISS ](#FAISS )
+- [Hugging Face Transformers ](#Hugging Face Transformers )
+- [sentence-transformers](#sentence-transformers)
+- [NumPy / Pandas](#NumPy / Pandas)
+- [JSON](#JSON )
+- [Git & GitHub  ](#Git & GitHub  )
+  
