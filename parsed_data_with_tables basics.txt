@@ -1,0 +1,85 @@
+ 
+import fitz  # PyMuPDF for text extraction
+import pdfplumber  # For table extraction
+import pytesseract  # Tesseract for OCR on scanned PDFs
+from pdf2image import convert_from_path  # To convert PDF pages to images
+import json
+import os
+import gc
+
+# Path to Tesseract executable (change this if necessary)
+pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+
+# Function to extract text from a page using PyMuPDF
+def extract_text_from_page(pdf_doc, page_num):
+    """Extract text from a specific page using PyMuPDF."""
+    page = pdf_doc.load_page(page_num)
+    text = page.get_text("text")
+    return text.strip()
+
+# Function to extract tables from a page using pdfplumber
+def extract_tables_from_page(pdf_path, page_num):
+    """Extract tables from a specific page using pdfplumber."""
+    with pdfplumber.open(pdf_path) as pdf:
+        page = pdf.pages[page_num]
+        tables = page.extract_tables()
+        return tables
+
+# Function to extract text from a scanned page using OCR (Tesseract)
+def extract_text_using_ocr(pdf_path, page_num):
+    """Extract text from a scanned page using OCR (Tesseract)."""
+    images = convert_from_path(pdf_path, first_page=page_num + 1, last_page=page_num + 1)
+    text = pytesseract.image_to_string(images[0])
+    return text.strip()
+
+# Main function to parse the PDF
+def parse_pdf(pdf_path, chunk_size=10):
+    """Extract structured data from the PDF (text + tables + OCR for scanned pages)."""
+    doc = fitz.open(pdf_path)
+    parsed_data = {}
+
+    total_pages = len(doc)
+
+    for start_page in range(0, total_pages, chunk_size):
+        end_page = min(start_page + chunk_size, total_pages)
+
+        for page_num in range(start_page, end_page):
+            # Extract text normally if available
+            text = extract_text_from_page(doc, page_num)
+            print(f"Text from Page {page_num}:", text)  # Print full text of the page
+
+            # If the page has no text (could be a scanned page), use OCR (Tesseract)
+            if not text.strip():
+                print(f"Page {page_num} is a scanned page, using OCR.")
+                text = extract_text_using_ocr(pdf_path, page_num)
+
+            # Extract tables
+            tables = extract_tables_from_page(pdf_path, page_num)
+            print(f"Tables from Page {page_num}:", tables)  # Debug: Print extracted tables
+
+            # Store the text and tables (basic structure)
+            parsed_data[page_num] = {"text": text, "tables": tables}
+
+        # Save the parsed data after processing each chunk
+        with open("parsed_data_with_tables.json", "w", encoding="utf-8") as f:
+            json.dump(parsed_data, f, indent=4, ensure_ascii=False)
+
+        print(f"Progress saved after processing pages {start_page} to {end_page}")
+        gc.collect()
+
+    print("Parsing complete. Data saved to parsed_data_with_tables.json")
+    return parsed_data
+
+# Run the parser for the provided PDF
+pdf_file_path = r"C:\Users\HOME\Pictures\SAMBHV STEEL TUBES LIMITED.pdf"  # Path to your PDF file
+
+if os.path.exists(pdf_file_path):
+    parsed_output = parse_pdf(pdf_file_path)
+    print("Extracted Data:", json.dumps(parsed_output, indent=4, ensure_ascii=False))
+else:
+    print(f"Error: File '{pdf_file_path}' not found.")
+
+python view_json.py
+python view_json.py  
+python pdf_parser.py 
+
