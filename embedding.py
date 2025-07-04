@@ -7,7 +7,7 @@ from transformers import AutoModelForSeq2SeqLM, AutoTokenizer, pipeline
 from sentence_transformers import SentenceTransformer
 from concurrent.futures import ThreadPoolExecutor
 
-# ✅ Set working directory
+#  Set working directory
 BASE_DIR = "C:/Users/udumularahul/Downloads/data analysis drhp"
 
 if not os.path.exists(BASE_DIR):
