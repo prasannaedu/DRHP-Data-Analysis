@@ -24,7 +24,7 @@ for i, embedding_file in enumerate(embedding_files):
     if index is None:
         index = faiss.IndexFlatL2(embedding_dim)
     
-    # Store metadata
+    
     for j in range(len(embeddings)):
         metadata[str(i * 100 + j)] = {
             "file": embedding_file.replace("_embeddings.npy", "_summarized.json"),
@@ -33,7 +33,7 @@ for i, embedding_file in enumerate(embedding_files):
 
     index.add(embeddings)
 
-# Save FAISS index
+
 faiss.write_index(index, FAISS_INDEX_PATH)
 with open(METADATA_PATH, "w", encoding="utf-8") as f:
     json.dump(metadata, f, indent=4)
