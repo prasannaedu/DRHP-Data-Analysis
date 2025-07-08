@@ -7,18 +7,18 @@ from transformers import AutoModelForSeq2SeqLM, AutoTokenizer, pipeline
 from sentence_transformers import SentenceTransformer
 from concurrent.futures import ThreadPoolExecutor
 
-#  Set working directory
+
 BASE_DIR = "C:/Users/udumularahul/Downloads/data analysis drhp"
 
 if not os.path.exists(BASE_DIR):
     raise ValueError(f" Error: Directory {BASE_DIR} does not exist!")
 os.chdir(BASE_DIR)
 
-#  Enable GPU if available
+
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 torch.manual_seed(42)  
 
-#  Define models
+#  models
 SUMMARIZATION_MODEL = "facebook/bart-large-cnn"
 EMBEDDING_MODEL = "paraphrase-MiniLM-L6-v2"
 
@@ -37,7 +37,7 @@ try:
         "summarization",
         model=model,
         tokenizer=tokenizer,
-        device=0 if torch.cuda.is_available() else -1  # Use GPU if available
+        device=0 if torch.cuda.is_available() else -1  
     )
 
     print(" Summarization model loaded successfully!")
@@ -45,7 +45,7 @@ except Exception as e:
     print(f" Error loading summarization model: {e}")
     exit(1)
 
-#  Load embedding model
+
 embedding_model = SentenceTransformer(EMBEDDING_MODEL, device=device)
 
 #  Function to split text into chunks
@@ -70,7 +70,7 @@ def split_text(text, max_tokens=512):
 
     return chunks
 
-#  Function to summarize a chunk (dynamic max_length handling)
+#  chunk (dynamic max_length handling)
 def summarize_chunk(chunk):
     if len(chunk.split()) < 50:  
         return chunk  # Return original text if too short
@@ -86,24 +86,23 @@ def summarize_chunk(chunk):
         print(f" Error summarizing chunk: {e}")
         return chunk  
 
-#  Function to generate key findings (parallel processing)
+#  Function to generate key findings
 def generate_key_findings(text):
     if not text.strip():
         return "No content available."
 
     chunks = split_text(text)
     
-    # Process multiple summaries in parallel
+    
     with ThreadPoolExecutor(max_workers=4) as executor:
         summaries = list(executor.map(summarize_chunk, chunks))
 
     return " ".join(summaries)
 
-#  Function to generate text embeddings
 def generate_text_embeddings(text):
     return embedding_model.encode(text, convert_to_numpy=True)
 
-#  Function to process JSON files
+
 def process_embeddings():
     json_files = glob.glob("*.json")  
     if not json_files:
@@ -138,7 +137,7 @@ def process_embeddings():
             embedding = generate_text_embeddings(summary)
             embeddings.append(embedding)
 
-        #  Save results
+      
         embeddings_filename = os.path.join(BASE_DIR, json_file.replace(".json", "_embeddings.npy"))
         json_output_filename = os.path.join(BASE_DIR, json_file.replace(".json", "_summarized.json"))
 
